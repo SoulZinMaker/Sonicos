@@ -2,22 +2,15 @@ FROM golang:1.26-bookworm
 
 WORKDIR /src
 
-<<<<<<< HEAD
-# System deps: ffmpeg for audio/sticker/media processing, Python 3 for edge-tts, ca-certificates for TLS.
-=======
-# System deps: ffmpeg for audio/sticker/media processing, Python 3 for edge-tts/yt-dlp, ca-certificates for TLS.
->>>>>>> a651b9d (feat(core): implement web onboarding, audit logging, and enhanced storage)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates ffmpeg curl python3 python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
-# Python edge-tts CLI used by the !tts plugin (text-to-speech synthesis).
-<<<<<<< HEAD
+
 RUN pip3 install --no-cache-dir --break-system-packages edge-tts
-=======
+
 # yt-dlp for !mp3/!mp4 YouTube downloads.
 RUN pip3 install --no-cache-dir --break-system-packages edge-tts yt-dlp
->>>>>>> a651b9d (feat(core): implement web onboarding, audit logging, and enhanced storage)
 
 COPY go.mod go.sum ./
 RUN go mod download
